@@ -203,3 +203,13 @@ Keep `<pre>` content as plain text (no inner `<code>` tags for flow diagrams).
 - **Missing pages cause build errors**: Create all pages referenced in `App.tsx` before saving
 - **TOC not rendering**: Ensure `<h1>/<h2>/<h3>` in article HTML have no extra attributes breaking the regex
 - **Sidebar not showing sub-items**: Default `expandedCats` state must include the first category ID set to `true`
+- **Sidebar all collapsed by default**: `expandedCats` is initialized as `{}` (empty) — all categories start collapsed and users expand them manually
+
+## Security: PAT Handling for manus-skill Repo
+
+> **Important**: When syncing this skill to `github.com/clarkman-meta/manus-skill`, the `references/github-credentials.md` file must have its PAT replaced with the `<GITHUB_PAT>` placeholder before pushing, to avoid token leakage to the public repo.
+>
+> - **Sandbox local** (`/home/ubuntu/skills/embedded-knowledge/references/github-credentials.md`): Retains the **full token** for Manus runtime use.
+> - **manus-skill repo** (`embedded-knowledge/references/github-credentials.md`): Contains only `<GITHUB_PAT>` as a placeholder — never the real token.
+>
+> When updating the skill and pushing to manus-skill, always sanitize `github-credentials.md` in the manus-skill copy before committing.
