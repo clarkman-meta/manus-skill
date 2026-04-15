@@ -137,3 +137,20 @@ Follow this exact 5-step order:
 - `webdev_save_checkpoint` fails or site not updated → `origin` points to GitHub instead of S3; re-run `git clone` then `webdev_init_project`
 - GitHub push succeeds but live site unchanged → normal; GitHub is backup only, `webdev_save_checkpoint` is the only deploy trigger
 - `webdev_save_checkpoint` called before `webdev_init_project` → will commit to wrong remote; start over with correct sequence
+
+## GitHub Token Safety — manus-skill Repo
+
+When pushing SKILL.md to the public repo [github.com/clarkman-meta/manus-skill](https://github.com/clarkman-meta/manus-skill), **always replace sensitive tokens with placeholders before committing**:
+
+- GitHub PAT → `<GITHUB_PAT>`
+- Jira API Token → `<JIRA_API_TOKEN>`
+
+The local sandbox copy at `/home/ubuntu/skills/jira-tool/SKILL.md` retains the full tokens for Manus to use. The GitHub copy is for version control and reference only — it must never contain real credentials.
+
+**Workflow for updating the skill on GitHub**:
+1. Edit `/home/ubuntu/skills/jira-tool/SKILL.md` locally (with real tokens)
+2. Copy to `/home/ubuntu/manus-skill/jira-tool/SKILL.md`
+3. Replace tokens with placeholders (Python one-liner or sed)
+4. Commit and push to `origin main`
+
+**Adding other skills**: Create a subdirectory per skill directly in the `manus-skill` repo (e.g., `manus-skill/other-skill/SKILL.md`). Apply the same token-scrubbing step before pushing.
